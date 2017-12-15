@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  vars:
+    http_port: 80
+    max_clients: 200
+  remote_user: root
+  tasks:
+# =========================================
+# Adicionando Repositorios
+# =========================================
+
+  - name: Cria db SIP
+    command: "mysqladmin create sip"
+
+  - name: Cria db SEI
+    command: "mysqladmin create sei"
+
+  - name: Importa Esquema SEI
+    command: "mysql sei < /tmp/sei_mysql.sql"
+
+  - name: Importa Esquema SIP
+    command: "mysql sip < /tmp/sip_mysql.sql"
